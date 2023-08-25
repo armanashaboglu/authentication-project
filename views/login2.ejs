@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Getir | Login</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:400" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+        
+        <script>
+            var message = "<%= message %>";
+            console.log('we defined the message: ', message)
+            $(document).ready(function () {
+                if (message) {
+                    console.log('test')
+                    $("#toast-msg").toast('show');
+                }
+            });
+        </script>
+	<style>
+		body {
+			height: 100%;
+			background-color: #5c3cbb;
+		}
+
+		html {
+			height: 100%;
+		}
+
+		.wrapper {
+			display: flex;
+		}
+
+		.w-50 {
+			min-height: 100%;
+		}
+
+		.logo-text {
+			color: rgb(251,211,12);
+			font-weight: bold;
+			font-size: 72px;
+			user-select: none;
+		}
+
+		.alt-text {
+			color: rgb(251,211,12);
+			font-size: 28px;
+			user-select: none;
+		}
+
+		.logo-all {
+			width: max-content;
+			text-align: center;
+		}
+
+		#left,
+		#right {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		#left {
+			padding-right: 10px;
+		}
+
+		.google-btn {
+			margin: 25px;
+			width: 80%;
+			min-width: 184px;
+			max-width: 184px;
+			height: 42px;
+			background-color: #fcfcfc;
+			border-radius: 2px;
+			box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+			cursor: pointer;
+			cursor: hand;
+			align-self: center;
+			user-select: none;
+			transition: all 400ms ease 0s;
+			display: flex;
+		}
+		.google-btn .google-icon-wrapper {
+			position: absolute;
+			margin-top: 1px;
+			margin-left: 1px;
+			width: 40px;
+			height: 40px;
+			border-radius: 2px;
+			user-select: none
+		}
+		.google-btn .google-icon-svg {
+			position: absolute;
+			margin-top: 11px;
+			margin-left: 11px;
+			width: 18px;
+			height: 18px;
+			user-select: none
+		}
+		.google-btn .btn-text {
+			float: right;
+			margin: 11px 14px 40px 40px;
+			color: #757575;
+			font-size: 14px;
+			letter-spacing: .2px;
+			font-family: Roboto;
+			user-select: none
+		}
+		.google-btn:hover {
+			box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
+			user-select: none
+		}
+		.google-btn:active {
+			box-shadow: 0 1px 1px #757575;
+			background: #F8F8F8;
+			color: #fff;
+			user-select: none
+		}
+
+		.normal-btn {
+			margin: 25px;
+			width: auto;
+			display: inline-block;
+			min-width: auto;
+			max-width: 184px;
+			height: 42px;
+			background-color: #fcfcfc;
+			border-radius: 2px;
+			box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+			cursor: pointer;
+			cursor: hand;
+			align-self: center;-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			transition: all 400ms ease 0s
+		}
+		.normal-btn .btn-text {
+			float: left;
+			margin: 11px 14px 11px 14px;
+			color: #757575;
+			font-size: 14px;
+			letter-spacing: .2px;
+			font-family: Roboto;
+			user-select: none
+		}
+		.normal-btn:hover {
+			box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
+			user-select: none
+		}
+		.normal-btn:active {
+			box-shadow: 0 1px 1px #757575;
+			background: #F8F8F8;
+			color: #fff;
+			user-select: none
+		}
+	</style>
+
+	<head>
+
+	<body>
+		<div class="toast-container" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast" id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true" text-align="right">
+				<div class="toast-header">
+					<img src="https://cdn.getir.com/marketing/Getir_Logo_1621812382342.png" alt="Getir Logo" width="25" height="25">
+					<strong class="me-auto" style="padding: 15px;"><i class="bi-globe"></i>Error logging in</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+					<% if (message !=null) { %>
+                        <div class="toast-body"><%= message %></div>
+					<% } %>
+			</div>
+		</div>
+		<div class="wrapper" style="min-height: 100%;">
+			<div class="container w-50">
+				<div class="branding" style="top: 50%; left: 10%; position: relative; margin-top: -159px;">
+					<div class="logo-all">
+						<img src="https://cdn.getir.com/marketing/Getir_Logo_1621812382342.png" alt="Getir Logo" width="150" height="150">
+					</div>
+					<h3 class="alt-text">Getir Bi Mutluluk.</h3>
+				</div>
+
+			</div>
+			<div class="container w-50">
+				<div class="container w-75" style="top: 50%; position: relative; margin-top: -159px;">
+					<div class="card">
+						<div class="card-body">
+							<form action="/checklogin" method="post">
+								<div class="mb-3">
+									<label class="form-label">Username</label>
+									<input type="text" name="username" class="form-control" placeholder="Username">
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Email</label>
+									<input type="email" name="email" class="form-control" placeholder="Email">
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Password</label>
+									<input type="password" name="password" class="form-control">
+								</div>
+								<button type="submit" class="btn btn-primary mb-2" style="width:100%">Login</button>
+                            </form>
+							<form action="/google" method="get">
+								<button type="submit" class="btn btn-primary mb-2" style="width:100%">Login With google</button>
+							</form>
+						</div>
+					</div>
+					<div class="google-btn">
+						<div class="google-icon-wrapper">
+							<img class="google-icon-svg"
+								src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+						</div>
+						
+						<form action="/google" method="get">
+							<button type="submit" class="btn-text"><b>Sign in with Google</b></button>
+						</form>
+					</div>
+					<div class="card mt-2">
+						<div class="card-body">
+							Don't have an account? <a href="/signup">Sign up</a>
+						</div>
+					</div>
+					<div class="card mt-2">
+						<div class="card-body">
+							Forgot password? <a href="/forgotpassword">Reset here</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+
+</html>
