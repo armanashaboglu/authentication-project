@@ -21,22 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const { auth } = require('express-openid-connect');
 
 const { requiresAuth } = require('express-openid-connect');
-
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: '34ed182e57ff54e4de80f86e6ecaac25b4f45a5a0e151a61e6cf930cdb264e58',
-  baseURL: 'http://localhost:3000',
-  clientID: 'oDydxZ8aszbsu7SEOa578590AmN1eUG0',
-  issuerBaseURL: 'https://dev-tziw3g3axoy7pskn.eu.auth0.com'
-};
-
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
 */
 
 app.use(session({
-    secret: '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',
+    secret: 'SECRET',
     resave: false,
     saveUninitialized: false
     }));
