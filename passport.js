@@ -6,9 +6,9 @@ var routes = require('./routes/routes.js');
 
 
 passport.use(new GoogleStrategy({
-        clientID: '28786774994-uhv6iup2v119pmbhp2lcb5o9413s59ac.apps.googleusercontent.com',
-        clientSecret: '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',
-        callbackURL: "http://localhost:3005/google/callback",
+        clientID: 'CLIENT_ID',
+        clientSecret: 'CLIENT_SECRET',
+        callbackURL: "CALL_BACK_URL",
         passReqToCallback   : true
 },
 function(request, accessToken, refreshToken, profile, done) {
