@@ -1,5 +1,5 @@
 # authentication-project
-Authentication system using OAuth2 with a basic To-Do list when logged in.
+Authentication system using OAuth2 with a basic React To-Do list when logged in.
 
 Steps to run:
 ```
