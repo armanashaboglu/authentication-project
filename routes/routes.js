@@ -58,6 +58,7 @@ const Task = mongoose.model('Task', TaskSchema);
 
 var login = function (req, res) {
   // res.redirect('/login');
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   console.log(req.session.message);
   if (authenticationToken != null) {
     req.session.message = "You have already logged in. Logout first.";
@@ -68,11 +69,13 @@ var login = function (req, res) {
 };
 
 var signUp = function (req, res) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   req.session.message = null;
   res.render("../views/signup.ejs")
 };
 
 var home = function (req, res) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   console.log(authenticationToken);
   if (authenticationToken == null) {
     req.session.message = "Please login in first.";
@@ -83,6 +86,8 @@ var home = function (req, res) {
 };
 
 var createAccount = function (req, res) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
+  console.log("Creating account...");
   console.log("email: " + req.body.email + " username: " + req.body.username + " password: " + req.body.password );
 
   if (!req.body.email || !req.body.username) {
@@ -117,6 +122,8 @@ var createAccount = function (req, res) {
 
 
 var checkLogin = function (req, res) {
+  console.log("made it to checklogin");
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   var emaiL = req.body.email;
   var userName = req.body.username;
   var passworD = SHA3(req.body.password).toString();
@@ -135,6 +142,7 @@ var checkLogin = function (req, res) {
 };
 
 var addAccountOAuth2 = function (profile, token) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   console.log("starting the log in");
   var username = profile.given_name + profile.family_name;
   var email = profile.email;
@@ -160,6 +168,7 @@ var addAccountOAuth2 = function (profile, token) {
 }
 
 var logout = function (req, res) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   authenticationToken = null;
   req.session.message = null;
   req.session.destroy((err) => {
@@ -174,7 +183,20 @@ var logout = function (req, res) {
   });
 }
 
+var logout2 = (req, res) => {
+    // req.logout(function(err) {
+    //   if (err) { return next(err); }
+    //   res.redirect('/');
+    // });
+    
+    res.clearCookie('username');
+    console.log('cookies cleared');
+    // console.log(req.cookies);
+    res.json({ success: true, message: 'Logged out successfully.' });
+};
+
 var addTask = function (req, res) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
     const username = req.body.username;
     const task = req.body.task;
     const taskId = req.body.taskId;
@@ -198,6 +220,7 @@ var addTask = function (req, res) {
       } else {
         // If user doesn't exist, create a new user with the task
         console.log('user does not exist in task db from add task');
+        console.log('adding them with username: ' + username);
         const newUser = new Task({
           username: username,
           tasks: [{text: task, completed: false, taskId: taskId}]
@@ -211,6 +234,7 @@ var addTask = function (req, res) {
 };
 
 var deleteTask = function (req, res) {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
     const { username, taskId } = req.body;
 
     Task.findOne({ username })
@@ -241,6 +265,7 @@ var deleteTask = function (req, res) {
 // };
 
 var getTasks = (req, res) => {
+  // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
   const username = req.body.username;
 
     Task.findOne({ username: username })
@@ -277,7 +302,7 @@ var routes = {
   checkLogin: checkLogin,
   createAccount: createAccount,
   addAccountOAuth2: addAccountOAuth2,
-  logout: logout,
+  logout: logout2,
   addTask: addTask,
   deleteTask: deleteTask,
   getTasks: getTasks,

@@ -6,16 +6,16 @@ var session = require('express-session');
 const request = require('request-promise')
 const passport = require('passport');
 require('./passport.js');
+const cors = require('cors');
 
 require('dotenv').config()
 const cookieParser = require('cookie-parser');
-
-
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 /*
 const { auth } = require('express-openid-connect');
@@ -68,7 +68,12 @@ app.get('/google/callback',
     }),
     function (req, res) {
         // console.log(req);
-        res.redirect('/home')
+        // console.log(req);
+        console.log(req.user);
+        // var string = encodeURIComponent(req.body.username);
+        const username = req.user.given_name + req.user.family_name;
+        res.cookie('username', username);
+        res.redirect('http://localhost:3005/home');
     }
 );
 
@@ -91,25 +96,34 @@ app.get('/profile', requiresAuth(), (req, res) => {
 });
 */
 function ensureAuthenticated(req, res, next) {
-    if (req.cookies && req.cookies['yourCookieName']) {
-        return next();  
+    if (req.isAuthenticated()) {
+        return next();
     }
-    res.redirect('/login');  
+    res.redirect('/login');
 }
+
 app.get('/home', ensureAuthenticated, (req, res) => {
+    // res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
     res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
+app.get('/cors', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'http://localhost:3005');
+    res.send({ "msg": "This has CORS enabled 🎈" });
+})
 
-/* Routes */  
+
+/* Routes */
 app.get('/', routes.login);
-app.get('/login2', routes.login);   
+app.get('/login2', routes.login);
 app.get('/signup', routes.signup);
 app.post('/checklogin', routes.checkLogin);
 app.post('/createaccount', routes.createAccount);
 app.post('/createtask', routes.addTask);
 app.post('/deletetask', routes.deleteTask);
 app.post('/gettasks', routes.getTasks);
+app.post('/logout', routes.logout);
+
 
 
 const PORT = 3000;
